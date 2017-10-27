@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>telenet.aem</groupId>
+    <artifactId>content-packages-tool-parent</artifactId>
+    <version>2.0.0</version>
+    <packaging>pom</packaging>
+
+    <name>${project.groupId} - ${project.artifactId}</name>
+
+    <description>
+        Parent Maven POM for the 'Content Packages Tool for Authors' project.
+    </description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+        
+        <install.dir>/apps/content-packages-tool/install</install.dir>
+        
+        <cq.host.author>localhost</cq.host.author>
+        <cq.port.author>4502</cq.port.author>
+        <cq.junction.author>/MB</cq.junction.author>
+        <cq.user.author>admin</cq.user.author>
+        <cq.password.author>admin</cq.password.author>
+
+        <cq.host.publish>localhost</cq.host.publish>
+        <cq.port.publish>4503</cq.port.publish>
+        <cq.user.publish>admin</cq.user.publish>
+        <cq.password.publish>admin</cq.password.publish>
+    </properties>
+
+
+    <modules>
+        <module>core</module>
+        <module>view</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Adobe AEM -->
+            <dependency>
+                <groupId>com.adobe.aem</groupId>
+                <artifactId>uber-jar</artifactId>
+                <version>6.3.0</version>
+                <classifier>apis</classifier>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- OSGi -->
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.core</artifactId>
+                <version>6.0.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.cmpn</artifactId>
+                <version>6.0.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.service.component.annotations</artifactId>
+                <version>1.3.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.service.metatype.annotations</artifactId>
+                <version>1.3.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.annotation</artifactId>
+                <version>6.0.1</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Apache -->
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.1</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.3.2</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Javax -->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.jcr</groupId>
+                <artifactId>jcr</artifactId>
+                <version>2.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>3.0.0</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Logging -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.6</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Testing -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>1.10.19</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>org.apache.sling.testing.osgi-mock</artifactId>
+                <version>2.0.2</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.wcm</groupId>
+                <artifactId>io.wcm.testing.aem-mock</artifactId>
+                <version>1.8.2</version>
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.day.jcr.vault</groupId>
+                    <artifactId>content-package-maven-plugin</artifactId>
+                    <version>0.0.24</version>
+                    <configuration>
+                        <verbose>true</verbose>
+                        <failOnError>true</failOnError>
+                        <failOnMissingEmbed>true</failOnMissingEmbed>
+                        <targetURL>http://${cq.host}:${cq.port}${cq.context_root}/crx/packmgr/service.jsp</targetURL>
+                        <userId>${cq.user}</userId>
+                        <password>${cq.password}</password>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <configuration>
+                        <instructions>
+                            <Bundle-Category>telenet</Bundle-Category>
+                            <Bundle-DocURL>https://www.telenet.be</Bundle-DocURL>
+                            <Bundle-Vendor>TELENET</Bundle-Vendor>
+                            <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+                            <Embed-Directory>OSGI-INF/lib</Embed-Directory>
+                            <Embed-Transitive>true</Embed-Transitive>
+                            <_dsannotations>*</_dsannotations>
+                            <_metatypeannotations>*</_metatypeannotations>
+                        </instructions>
+                        <exportScr>true</exportScr>
+                    </configuration>
+                    <executions>
+                        <!-- Configure extra execution of 'manifest' in process-classes phase to make sure SCR metadata is generated before unit test runs -->
+                        <execution>
+                            <id>scr-metadata</id>
+                            <goals>
+                                <goal>manifest</goal>
+                            </goals>
+                            <configuration>
+                                <supportIncrementalBuild>true</supportIncrementalBuild>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>maven-sling-plugin</artifactId>
+                    <version>2.1.8</version>
+                    <executions>
+                        <execution>
+                            <id>install-bundle</id>
+                            <goals>
+                                <goal>install</goal>
+                            </goals>
+                            <configuration>
+                                <slingUrl>http://${cq.host}:${cq.port}${cq.context_root}</slingUrl>
+                                <slingUrlSuffix>${install.dir}</slingUrlSuffix>
+                                <user>${cq.user}</user>
+                                <password>${cq.password}</password>
+                                <deploymentMethod>SlingPostServlet</deploymentMethod>
+                                <failOnError>true</failOnError>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.7</version>
+                    <executions>
+                        <execution>
+                            <id>copy-content-resources</id>
+                            <phase>process-resources</phase>
+                            <goals>
+                                <goal>copy-resources</goal>
+                            </goals>
+                            <configuration>
+                                <outputDirectory>${project.build.directory}/vault-work</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${basedir}/src/main/content</directory>
+                                        <filtering>false</filtering>
+                                        <excludes>
+                                            <exclude>**/.svn</exclude>
+                                            <exclude>**/.vlt</exclude>
+                                            <exclude>**/.vltignore</exclude>
+                                            <exclude>**/.DS_Store</exclude>
+                                        </excludes>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.12</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.0</version>
+                    <configuration>
+                        <showDeprecation>true</showDeprecation>
+                        <showWarnings>true</showWarnings>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                        <testSource>1.8</testSource>
+                        <testTarget>1.8</testTarget>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>external.atlassian.jgitflow</groupId>
+                    <artifactId>jgitflow-maven-plugin</artifactId>
+                    <version>1.0-m5.1</version>
+                    <configuration>
+                      <pushReleases>true</pushReleases>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>local-author</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <cq.host>${cq.host.author}</cq.host>
+                <cq.port>${cq.port.author}</cq.port>
+                <cq.context_root>${cq.junction.author}</cq.context_root>
+                <cq.user>${cq.user.author}</cq.user>
+                <cq.password>${cq.password.author}</cq.password>
+            </properties>
+        </profile>
+        <profile>
+            <id>local-publish</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <cq.host>${cq.host.publish}</cq.host>
+                <cq.port>${cq.port.publish}</cq.port>
+                <cq.junction />
+                <cq.user>${cq.user.publish}</cq.user>
+                <cq.password>${cq.password.publish}</cq.password>
+            </properties>
+        </profile>
+    </profiles>
+
+</project>

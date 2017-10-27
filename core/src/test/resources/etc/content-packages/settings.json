@@ -1,0 +1,4 @@
+{
+  "jcr:primaryType": "sling:Folder",
+  "excludedPaths" : ["/etc/global-config","/etc/site-config"]
+}

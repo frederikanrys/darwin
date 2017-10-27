@@ -1,0 +1,93 @@
+{
+  "jcr:primaryType": "sling:Folder",
+  "config-one": {
+    "jcr:primaryType": "nt:unstructured",
+    "jcr:title": "Config 1",
+    "jcr:mixinTypes": [
+      "mix:created"
+    ],
+    "jcr:created": "Fri Dec 16 2016 13:45:03 GMT+0100",
+    "jcr:createdBy": "admin",
+    "labels": {
+      "jcr:primaryType": "nt:unstructured",
+      "label-one": {
+        "jcr:primaryType": "nt:unstructured",
+        "path": "/apps/my-project/i18n/en/label-one"
+      },
+      "label-two": {
+        "jcr:primaryType": "nt:unstructured",
+        "path": "/apps/my-project/i18n/en/label-two"
+      }
+    },
+    "pages": {
+      "jcr:primaryType": "nt:unstructured",
+      "page-one": {
+        "jcr:primaryType": "nt:unstructured",
+        "path": "/content/site/page-one"
+      },
+      "page-two": {
+        "jcr:primaryType": "nt:unstructured",
+        "path": "/content/site/page-two"
+      },
+      "page-three": {
+        "jcr:primaryType": "nt:unstructured",
+        "path": "/content/site/page-three"
+      }
+    },
+    "tags": {
+      "jcr:primaryType": "nt:unstructured",
+      "tag-one": {
+        "jcr:primaryType": "nt:unstructured",
+        "path": "/etc/tags/tag-one"
+      },
+      "tag-two": {
+        "jcr:primaryType": "nt:unstructured",
+        "path": "/etc/tags/tag-two"
+      },
+      "tag-three": {
+        "jcr:primaryType": "nt:unstructured",
+        "path": "/etc/tags/tag-three"
+      },
+      "tag-four": {
+        "jcr:primaryType": "nt:unstructured",
+        "path": "/etc/tags/tag-four"
+      }
+    }
+  },
+  "config-two": {
+    "jcr:primaryType": "nt:unstructured",
+    "jcr:title": "Config 2",
+    "jcr:mixinTypes": [
+      "mix:created"
+    ],
+    "jcr:created": "Thu Dec 15 2016 13:45:03 GMT+0100",
+    "jcr:createdBy": "admin",
+    "labels": {
+      "jcr:primaryType": "nt:unstructured"
+    },
+    "pages": {
+      "jcr:primaryType": "nt:unstructured"
+    },
+    "tags": {
+      "jcr:primaryType": "nt:unstructured"
+    }
+  },
+  "config-three": {
+    "jcr:primaryType": "nt:unstructured",
+    "jcr:title": "Config 3",
+    "jcr:mixinTypes": [
+      "mix:created"
+    ],
+    "jcr:created": "Wed Dec 14 2016 13:45:03 GMT+0100",
+    "jcr:createdBy": "admin",
+    "labels": {
+      "jcr:primaryType": "nt:unstructured"
+    },
+    "pages": {
+      "jcr:primaryType": "nt:unstructured"
+    },
+    "tags": {
+      "jcr:primaryType": "nt:unstructured"
+    }
+  }
+}
