@@ -13,7 +13,7 @@ import javax.annotation.Nonnull;
 
 @Component(service = AdapterFactory.class,
         property = {
-                AdapterFactory.ADAPTER_CLASSES + "=GlobalSettings",
+                AdapterFactory.ADAPTER_CLASSES + "=be.telenet.edev.aem.cpt.api.settings.GlobalSettings",
                 AdapterFactory.ADAPTABLE_CLASSES + "=org.apache.sling.api.resource.Resource"
         })
 public class GlobalSettingsAdapterFactory implements AdapterFactory {
